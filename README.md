@@ -5,8 +5,7 @@
 
 | **Module/Lab** | **Description**           | **GitHub Link**                       |
 |-----------------|---------------------------|---------------------------------------|
-| Module 1        | Introduction to [Topic]  | [Module 1 File](Modules/1
-) |
+| Module 1        | Introduction to [Topic]  | [Module 1 File](https://github.com/arcorbitt/GEOG676-GIS-PROGRAMMING-SPRING25/blob/main/module1.md) |
 | Module 2        | [Topic] Fundamentals     | [Module 2 File](https://github.com/your-username/your-repo-name/blob/main/module2.md) |
 | Module 3        | Advanced [Topic]         | [Module 3 File](https://github.com/your-username/your-repo-name/blob/main/module3.md) |
 | Module 4        | [Topic] Applications     | [Module 4 File](https://github.com/your-username/your-repo-name/blob/main/module4.md) |
