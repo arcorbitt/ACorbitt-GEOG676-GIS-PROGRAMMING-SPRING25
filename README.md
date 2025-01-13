@@ -5,8 +5,9 @@
 
 | **Module/Lab** | **Description**           | **GitHub Link**                       |
 |-----------------|---------------------------|---------------------------------------|
-| Module 1        | Introduction             | [Module 1 File]("C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Modules\1") |
-| Module 2        | Set up                   | [Module 2 File](https://github.com/your-username/your-repo-name/blob/main/module2.md) |
+| Module 1        | Introduction to [Topic]  | [Module 1 File](https://github.com/your-username/GEOG676-GIS-PROGRAMMING-SPRING25/blob/main/module1.md
+) |
+| Module 2        | [Topic] Fundamentals     | [Module 2 File](https://github.com/your-username/your-repo-name/blob/main/module2.md) |
 | Module 3        | Advanced [Topic]         | [Module 3 File](https://github.com/your-username/your-repo-name/blob/main/module3.md) |
 | Module 4        | [Topic] Applications     | [Module 4 File](https://github.com/your-username/your-repo-name/blob/main/module4.md) |
 | Module 5        | [Topic] Analysis         | [Module 5 File](https://github.com/your-username/your-repo-name/blob/main/module5.md) |
