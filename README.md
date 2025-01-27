@@ -6,4 +6,4 @@
 
 |Labs    |
 |:------:|
-|[lab_1](
+|[lab_1](Labs/1/README.md)|
