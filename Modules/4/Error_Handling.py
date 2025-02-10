@@ -116,4 +116,3 @@ finally:
     if file is not None:
         file.close()
         print("Closing file")
-    
