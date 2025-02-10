@@ -39,3 +39,45 @@ class TriangularNums:
 n = int(input("Enter the nth term: "))
 for x in TriangularNums(n):
     print(x)
+
+#-----------------------------------------------------------List Comprehension-----------------------------------------------------------
+
+# List comprehension is an elegant way to define and create lists based on existing lists.
+# List comprehension is generally more compact and faster than normal functions and loops for creating list.
+# However, we should avoid writing very long list comprehensions in one line to ensure that code is user-friendly.
+# Remember, every list comprehension can be rewritten in for loop, but every for loop can’t be rewritten in the form of list comprehension.
+# List comprehension is an example of functional programming.
+# You can use list comprehension to create lists based on existing lists.
+# The general syntax is:
+# [expression for item in iterable if condition == True]
+# For example, to create a list of squares of numbers from 0 to 9, you can use:
+# squares = [x**2 for x in range(10)]
+# This will create a list of squares of numbers from 0 to 9.
+# You can also use list comprehension to filter elements from a list.
+# For example, to create a list of even numbers from 0 to 9, you can use:
+# evens = [x for x in range(10) if x % 2 == 0]
+# This will create a list of even numbers from 0 to 9.
+# You can also use list comprehension to create a list of tuples.
+# For example, to create a list of tuples where each tuple is a pair of numbers and their squares, you can use:
+# pairs = [(x, x**2) for x in range(10)]
+# This will create a list of tuples where each tuple is a pair of numbers and their squares.
+# You can also use list comprehension to create a list of dictionaries.
+# For example, to create a list of dictionaries where each dictionary is a mapping of numbers to their squares, you can use:
+# squares = {x: x**2 for x in range(10)}
+# This will create a list of dictionaries where each dictionary is a mapping of numbers to their squares.
+# You can also use list comprehension to create a list of sets.
+# For example, to create a list of sets where each set is a set of numbers, you can use:
+# sets = [{x, x**2} for x in range(10)]
+# This will create a list of sets where each set is a set of numbers.
+# You can also use list comprehension to create a list of strings.
+# For example, to create a list of strings where each string is a string representation of a number, you can use:
+# strings = [str(x) for x in range(10)]
+# This will create a list of strings where each string is a string representation of a number.
+
+numbers = [1, 2, 3, 4, 5, 6]
+raisedNums = [x ** 3 for x in numbers] # List comprehension
+print(raisedNums) # Prints [1, 8, 27, 64, 125, 216]
+
+numbers = [1, 2, 3, 4, 5, 6]
+raisedNums = [x ** 3 for x in numbers if x % 2 == 0]
+print(raisedNums) # Prints [1, 8, 27, 64, 125, 216]
