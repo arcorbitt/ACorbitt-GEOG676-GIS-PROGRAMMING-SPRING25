@@ -48,21 +48,21 @@ class Triangle(Shape):
     
 #----------------------Read Text File----------------------------
 
-with open('Shape.txt', 'r') as file: #open the file in read mode
+with open('C:\\Users\\ms_ra\\GitHub\\GEOG676-GIS-PROGRAMMING-SPRING25\\Labs\\3\\Shape.txt', 'r') as file: #open the file in read mode
     lines = file.readlines() #read all lines in the file
 
 for line in lines:
-    components = line.split(',') #split the line by comma
+    components = line.strip().split(',') #split the line by comma and strip any extra whitespace
     shape = components[0] #get the shape name, first element in the list is always 0
     
     if shape == 'Rectangle':
-        rect = Rectangle(int(components[1]), int(components[2])) #create a new Rectangle object
+        rect = Rectangle(float(components[1]), float(components[2])) #create a new Rectangle object
         print('Area of Rectangle is:', rect.getArea()) #print the area of the rectangle
     elif shape == 'Circle':
-        cirl = Circle(int(components[1])) #create a new Circle object
-        print('Area of Circle is:', cirl.getArea()) #print the area of the circle
+        circ = Circle(float(components[1])) #create a new Circle object
+        print('Area of Circle is:', circ.getArea()) #print the area of the circle
     elif shape == 'Triangle':
-        tri = Triangle(int(components[1]), int(components[2])) #create a new Triangle object
+        tri = Triangle(float(components[1]), float(components[2])) #create a new Triangle object
         print('Area of Triangle is:', tri.getArea())
     else:
         pass
