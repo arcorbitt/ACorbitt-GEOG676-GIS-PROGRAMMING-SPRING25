@@ -12,3 +12,10 @@
 
 # In the following example we are going to clip campus structures in the feature class with the geographic area  of the garage buffer feature class.
 # The result will be a series of structures that fall within the garage 
+
+import arcpy
+arcpy.env.workspace = "C:/tmp/ArcGISPython"
+# Define our geodatabase
+campus = r"data/modules/17/Campus.gdb"
+# Perform a clip
+arcpy.Clip_analysis(campus + "/Structures", campus + "/GaragePoints_buffered", campus + "/Clipped_structures")
