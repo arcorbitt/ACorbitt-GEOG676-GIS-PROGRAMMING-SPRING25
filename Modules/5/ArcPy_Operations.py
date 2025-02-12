@@ -14,8 +14,29 @@
 # The result will be a series of structures that fall within the garage 
 
 import arcpy
-arcpy.env.workspace = "C:/tmp/ArcGISPython"
-# Define our geodatabase
-campus = r"data/modules/17/Campus.gdb"
-# Perform a clip
-arcpy.Clip_analysis(campus + "/Structures", campus + "/GaragePoints_buffered", campus + "/Clipped_structures")
+
+# Define the path to your geodatabase
+campus = r"C:\Program Files\DevSource\arcorbitt-GEOG-676\Module\05\Campus.gdb"
+
+# Set workspace
+arcpy.env.workspace = campus
+
+# List feature classes to confirm access
+feature_classes = arcpy.ListFeatureClasses()
+
+# Output results
+if feature_classes:
+    print("Feature Classes in the Geodatabase:")
+    for fc in feature_classes:
+        print(fc)
+else:
+    print("No feature classes found or unable to access the geodatabase.")
+
+arcpy.env.overwriteOutput = True
+
+# Check if the required feature classes exist
+if "Structures" in feature_classes and "GaragePoints_buffered" in feature_classes:
+    arcpy.Clip_analysis(campus + "/Structures", campus + "/GaragePoints_buffered", campus + "/Clipped_Structures")
+    print("Clip analysis completed successfully.")
+else:
+    print("Required feature classes not found in the geodatabase.")
