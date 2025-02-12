@@ -20,6 +20,8 @@
 
 #create a geodatabase and garage feature class
 import arcpy
+import os
+import csv
 
 arcpy.env.workspace = r"C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\4\Workspace"
 arcpy.env.overwriteOutput = True
@@ -37,7 +39,7 @@ arcpy.FeatureClassToGeodatabase_conversion(input_layer, gdb_path)
 garage_points = gdb_path + '\\' + garage_layer_name
 
 #open campus gdb, copy building feature to our gdb
-campus = r"C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\4\Workspace\Campus.gdb"
+campus = r"C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\4\Campus.gdb"
 buildings_campus = campus + '\Structures'
 buildings = gdb_path + '\\' + 'Buildings'
 
@@ -54,3 +56,7 @@ garageBuffered = arcpy.Buffer_analysis(gdb_path + '\Garage_Points_reprojected', 
 arcpy.Intersect_analysis([garageBuffered, buildings], gdb_path + '\Garage_Building_Intersection', 'ALL')
 
 arcpy.TableToTable_conversion(gdb_path + '\\Garage_Building_Intersection.dbf', r"C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\4", 'nearbyBuildings.csv')
+
+print('Process completed successfully! CSV file created at:', r"C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\4\nearbyBuildings.csv")
+
+#------------------------------------------------------------------------------------Fun with ArcPy------------------------------------------------------------------------------------#
