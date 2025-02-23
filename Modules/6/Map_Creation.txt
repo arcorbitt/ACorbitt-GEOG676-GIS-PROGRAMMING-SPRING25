@@ -1,0 +1,38 @@
+Learning Objectives
+1. Learn how to use arcpy in the creation of;
+	a. UniqueValue maps
+	b. GraduatedColors (Choropleth) maps
+
+Renderers
+
+	used by ArcGIS to determine how feature data gets drawn on the screen
+	Renderers tell the program exactly how that data should be presented to that user
+	Four basic feature renderer types
+		1. SimpleRenderer
+		2. UniqueValueRenderer
+		3. GraduatedColorsRenderer
+		4. GraduatedSymbolsRenderer
+	*Not all layers support renderers, always make sure that they layer has a renderer attribute first
+	
+SimpleRenderer
+
+	The most basic type of Renderers
+	Used to draw all features of a layer the same
+	Default renderer; used whenever we add a feature class to a maps
+	
+UniqueValueRenderer
+
+	Used to distinguish features in a feature layer based off of some clasification, usually a data field
+	We are given programmatic control over the ype of field used in the classification of features as well as the color ramp used when drawing the feature
+	
+GraduatedColorsRenderer
+
+	Used to render features in a feature layer based off of a specific field in the feature class
+	Used to create choropleth maps programmatically; useful if you need to quickly produce these maps
+	Gives control over the style of choropleth produced; allowing the choice of how many bins are present as well as the color ramp used
+	
+GraduatedSymbolsRenderer
+
+	Similar to GraduatedColorsRenderer in that each let you render features in a feature class depending on a number of bins and let you specify the color ramp used
+	This style is useful for creating graduated symbol style maps
+

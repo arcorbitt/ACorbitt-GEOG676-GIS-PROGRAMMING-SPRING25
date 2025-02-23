@@ -1,0 +1,134 @@
+Advanced_Python_Functions
+
+ADVANCED PYTHON FUNCTIONS---------------------------------
+
+Lambdas---------------------
+
+=type of short-hand
+=anonymous functions
+
+# Lambda example
+isOdd = lambda num: num % 2
+print(isOdd(6))
+# Prints 0; which means num was even
+
+~~variable isOdd value is a lambda function.
+~~this function takes in a single parameter num and divides num by 2
+~~the result indicates the remainder from the division
+~~if isOdd returns 0 we have an even number, if 1 returned it is odd
+
+#example
+#def isOdd(num):
+    return num % 2
+print(isOdd(6))
+
+Map-------------------------
+
+=used to apply a function to all the items in an input_list
+=returns a new list with the function applied to each item
+
+# Map example
+nums = [11, 22, 33, 44, 55]
+result = list(map(lambda x: x * 2, nums))
+print(result)
+# Prints [22, 44, 66, 88, 110]
+
+~~variable result is assigned the map function
+~~map function takes in a lambda function and a list
+~~lambda function multiplies each item in the list by 2
+~~result is a new list with the lambda function applied to each item
+
+Filter----------------------
+
+=type of map that only returns values that are True
+=returns a new list with the function applied to each item
+
+# Filter example
+x = [2, 3, 4, 5, 6, 7, 8]
+y = list(filter(lambda num: num % 2 == 0, x))
+z = list(filter(lambda num: num % 2, x))
+print(y) # Prints [2, 4, 6, 8]
+print(z) # Prints [3, 5, 7]
+
+~~variable y is assigned the filter function
+~~filter function takes in a lambda function and a list
+~~lambda function checks if each item in the list is even
+~~variable z is assigned the filter function
+~~lambda function checks if each item in the list is odd
+
+Reduce----------------------
+
+=a kind of function used to quickly calculate a single number given a lis tof values
+=returns a single value
+
+# Reduce example
+x = [2, 3, 4, 5, 6, 7, 8]
+add = lambda total, num: total + num
+summation = reduce(add, x)
+print(summation) # Prints 35
+
+~~variable summation is assigned the reduce function
+~~reduce function takes in a lambda function and a list
+~~lambda function adds each item in the list to the total
+~~result is a single value
+
+Generators------------------
+
+=functions that return traversable objects
+=generate values for us whenever we call it
+=use the yield keyword instead of return
+=usefule for generating extremely large data sets without allocating memory for all values
+=creating a function so it may be used in a for Loop
+
+# Generator example
+# Example from http://book.pythontips.com/en/latest/generators.html
+def fib(n):
+    a = b = 1
+    for i in range(n):
+        yield a
+        a, b = b, a + b
+
+for x in fib(6):
+    print(x) # Prints 1, 1, 2, 3, 5, 8
+
+~~variable x is assigned the fib function
+~~fib function takes in a number n
+~~a and b are assigned 1
+~~for loop runs n times
+~~yield a returns the value of a
+~~a is assigned the value of b and b is assigned the value of a + b
+~~for loop prints the value of a
+
+Decorators------------------
+
+=functions that modify the functionality of another function
+=use the @ symbol and are then placed above the original function
+=useful for modifying or extending the behavior of functions without changing their definition
+
+# Decorator example
+def myDecorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@myDecorator
+def sayHello():
+    print("Hello!")
+
+sayHello()
+# Prints "Something is happening before the function is called."
+# Prints "Hello!"
+# Prints "Something is happening after the function is called."
+
+~~variable sayHello is assigned the myDecorator function
+~~myDecorator function takes in a function
+~~wrapper function prints a message before and after the function is called
+~~sayHello function prints "Hello!"
+~~sayHello function is called
+~~wrapper function is called
+~~"Something is happening before the function is called." is printed
+~~"Hello!" is printed
+~~"Something is happening after the function is called." is printed
+
