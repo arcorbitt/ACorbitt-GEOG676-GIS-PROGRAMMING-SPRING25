@@ -180,4 +180,36 @@ GDB to ESRI JSON
 		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
 		arcpy.FeaturesToJSON_conversion(campus + "/GarageParking", "C:/tmp/ArcGISPython/garage.json", format_json=True)
 		
+GeoJSON
+
+	A way of encoding geographic data to a JSON object
+	Different from ESRI's JSON because it is a standard used by GIS applications and websites everywhere
+	One of the more common data formats you'll encounter anymore
 	
+	Example of a standard, point geometry GeoJSON:
+	
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [125.6, 10.1]
+			},
+			"properties": {
+				"name": "Dinagat Islands"
+			}
+		}
+		
+GDB to GeoJSON
+
+	To output a feature layer from a geodatabase, we use the FeaturesToJSON_conversion() method like with ESRI JSON
+	This time use a parameter called geoJSON
+	If we set this to True, our output will actually be a GeoJSON object
+	If we set this to False, out output will be an ESRI JSON object
+	
+	Example:
+	
+		import arcpy
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		output = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/outputgeojson.json"
+		arcpy.FeaturesToJSON_conversion(campus + "/GarageParking", output, format_json=False, geoJSON=True)
+		
