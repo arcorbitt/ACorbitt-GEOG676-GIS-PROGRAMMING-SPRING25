@@ -1,3 +1,183 @@
 Learning Objectives
 	1. Convert to and from common geographic data formats
+	2. https://github.com/hengcai-tamu/TAMU-MGSc-Online-GEOG676-GIS-PROGRAMMING/blob/main/modules/25.md
+	
+Arcpy data format conversions
+
+	Known as Data Wrangling
+	
+CSV
+	Comma separated values (CSV)
+	A way to store data in a human readable structure
+	Usually have a header row that occupies the first position in the file
+		Tells the user which column of data corresponds to a certain data field
+	For .csv's order does not matter
+	
+	Example:
+		User,Email,State,Country
+		Bill,bill@aol.com,Texas,United States
+		Jim,jim@yahoo.com,Oklahoma,United States
+		
+			~~4 fields separated by commas
+			~~each row after the header represents a single instance of data
+
+CSV to GDB
+
+	We create 2 variables, one that references our .csv and the other the desired output geodatabase
+	Use arcpy.management.MakeXYEventLayer() to do the conversion
+	We pass in the .csv, tell the method where the coordinate fields are, then the output location
+	
+	Example:
+		import arcpy
+		stadiums = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/stadiums.csv"
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		arcpy.management.MakeXYEventLayer(stadiums, "lon", "lat", campus + "/Stadiums")    
+
+GDB to CSV
+
+	Creating a CSV from a feature class found inside a geodatabase
+	We create a reference to our geodatabase as well as the feature layer inside the geodatabase to convert
+	Using arcpy.da.SearchCursor() we get all features in the feature class
+	Once we have all features, we create a new blank .csv file; then simply write out the contents
+		using write() methode
+	
+	Example:
+		import arcpy
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		garages = campus + "/GaragePoints"
+		garageFile = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/garagesFromGdb.csv"
+		search = arcpy.da.SearchCursor(garages, field_names=["Name", "SHAPE@XY"])
+		file = open(garageFile, "w")
+		file.write("GarageName,lon,lat\n")
+		for row in search:
+			print(row)
+			file.write("%s,%s,%s\n" % (row[0], row[1][0], row[1][1])) 
+		
+CSV to Table
+	
+	Turning a .csv to a table in a geodatabase
+	Create a reference to both the input .csv and reference to the output geodatabase
+	Call arcpy.TableToTable_conversion(), provide the input, output location, and output name
+	
+	Example:
+	
+		import arcpy
+		stadiums = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/stadiums.csv"
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		arcpy.TableToTable_conversion(stadiums, campus, "StadiumsTable")	
+
+GDB to CSV
+	
+	This example is an easier version of how to a feature class into a .csv
+	Create 2 variables that hold references to our output file name and input feature
+	Use arcpy.stats.ExportXYv() providing the input feature, fields you want to include, the delimiter, the output location, and optionally the field names as a header
+	
+	Example:
+	
+		import arcpy
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		export_fields = [Number;BldgAbbr;BldgName]
+		output_location = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/Structures.csv"
+		arcpy.stats.ExportXYv(campus + "/Structures", export_fields, "COMMA", output_location, 	"ADD_FIELD_NAMES")
+		
+KML
+
+	Key-hole markup language, KML
+	A way of structuring data based off of markup language making KML similar to XML and HTML
+	Data stored by tages that define the type of data contained within
+	
+	Below example shows a KML focument for a single point:
+	
+		<kml xmlns="http://www.opengis.net/kml/2.2">
+			<Placemark>
+				<name>Simple placemark</name>
+				<description>Attached to the ground. Intelligently places itself 
+					at the height of the underlying terrain.</description>
+				<Point>
+					<coordinates>-122.0822035425683,37.42228990140251,0</coordinates>
+				</Point>
+			</Placemark>
+		</kml>
+		
+KML to Layer
+
+	In order to convert a single KML file to a layer file, we must first import the arcpy module
+	Once complete, we can use the arcpy KMLToLayer_conversion() method.
+	Use the .kml as the first parameter and the output location as the second parameter
+	
+	Example:
+		
+		import arcpy
+		stadiums = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/stadiums.kml"
+		arcpy.KMLToLayer_conversion(stadiums, "C:/tmp/ArcGISPython/")
+		
+Layer to KML
+
+	You can only convert a layer file into a .kmz which is simply a compressed .kml file
+	Import arcpy module
+	Then use the LayerToKML_conversion() to turn an ESRI layer into a .kmz
+	
+	Example:
+	
+		import arcpy
+		stadiums = r"C:/tmp/ArcGISPython/stadiums.lyrx"
+		kml = r"C:/tmp/ArcGISPython/stadiums.kmz"
+		arcpy.LayerToKML_conversion(stadiums, kml)
+		
+ESRI JSON
+
+	JSON, or Javascript Object Notation, is a language-agnostic data structure that originated with Javascript but has since been adopted by many other languages
+	We use JSON as a means to organize data in a compact an human readable structure much like a .csv
+	Unlike .csv's JSON uses a key-value structure instead of commas to separate data
+	
+	Example:
+		
+		{
+			"Will": "Will Smith",
+			"Uncle Phil": "James Avery",
+			"Carlton": "Alfonso Ribeiro",
+			"Aunt Viv": {
+				"first": "Janet Hubert",
+				"second": "Daphne Reid"
+			},
+			"Aunt Viv Array": ["Janet Hubert", "Daphne Reid"]
+		}
+		
+		~each key-value pair is separated by a colon with the left side being the key, righ being value
+		~Anything can be left as value such as, strings, numbers, and arrays
+		~We can even have another JSON as above with "Aunt Viv"
+	
+	ESRI's JSON is a way of describing geographic data in a JSON format.
+	Unlike GeoJSON seen below, ESRI's JSON is only used by ESRI and is limited to only the ArcGIS REST API
+	
+	Example of ESRI's JSON object:
+	
+		{"x" : -118.15, "y" : 33.80, "spatialReference" : {"wkid" : 4326}}
+		
+ESRI JSON to GDB
+	
+	To convert ESRI's JSON to a feature class inside a geodatabase, us JSONToFeatures_conversion() method
+	This will take a .json file and an output geodatabase as parameters
+	
+		Example:
+		
+			import arcpy
+			campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"			arcpy.JSONToFeatures_conversion(r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/code/25/testjson.json", campus + "/TestJSON")
+
+GDB to ESRI JSON
+
+	To get an ESRI JSON file from a feature class, use GeaturesToJSON_conversion().
+	This method takes 3 parameters:
+		the input feature class
+		the output file name and path
+		a special parameter called format_json
+	If set to True, this will make the output be in a human readable format
+	If set to False, the JSON will still be human readable, but will be much harder as all white spaces outside of keys and values are removed
+	
+	Example:
+		
+		import arcpy
+		campus = r"D:/DevSource/Tamu/GeoInnovation/_GISProgramming/data/modules/25/Campus.gdb"
+		arcpy.FeaturesToJSON_conversion(campus + "/GarageParking", "C:/tmp/ArcGISPython/garage.json", format_json=True)
+		
 	
