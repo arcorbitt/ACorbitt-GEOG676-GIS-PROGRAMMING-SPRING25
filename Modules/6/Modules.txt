@@ -1,0 +1,72 @@
+MODULES AND PACKAGES
+--------------------------------------------
+OBJECTIVES----------
+1. Detail what Python modules are
+2. List a few differenct useful Python modules
+3. Learn the difference between modules and PACKAGES
+4. Learn how to make your own module
+
+TOPICS-------------
+1. Modules
+2. Packages
+3. Libraries
+4. Plugins
+
+MODULES
+
+Files that contain plain Python code, definitions, and statements
+Always have a .py extension
+Used to organize code logically
+
+PACKAGES
+
+Collection of different modules
+All packages are modules, but not all modules are packages
+Packages are just a special kind of module
+Any module that contains a __path__ attribute is a package
+Packages usually unite several modules under a shared name
+
+LIBRARY
+
+Not usually used in Python but sometimes used in place of package
+Can be a collection of packages
+You may see library used to describe a collectio of modules
+
+IMPORT
+
+A statement at the top of the script
+Import statement is used to import new functionality, classes, data types, and more into our script from available packages
+Can also rename the imported module by using "as" followed by the new name
+ex. import numpy as np
+    np.arange(15).reshape(3, 5)
+~importing the numpy functionality and renaming it np.
+
+FROM BLANK IMPORT BLANK
+
+You can import specific modules from an import instead of the entire package.
+
+ex. from numpy import #importing the entire numpy package
+    from numpy import arange #importing just the arange module from numpy
+
+CREATING YOUR OWN MODULE
+
+Using script that you have created and importing it into a new project
+Instead of copying and pasting the code, you can import the module
+Create a new file and save it as a .py file
+Create a function in the new file
+In the new project, import the module
+Call the function from the module
+
+# addition.py
+def addNums(numbers):
+    return sum(numbers)
+
+# test.py
+from addition import addNums
+x = [1, 3, 5, 7, 9]
+print(addNums(x))
+
+~We have 2 Python modules, addition and test. 
+~We want to import the functionality of addition into test.
+~We import the addNums function from addition and call it in test.
+~With our addNums funtion we are free to use the function without defining it again inside test.py
