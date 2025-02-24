@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><messages><msg code="0" type="2">Start Time: Sunday, February 23, 2025 7:13:46 PM</msg><msg code="1" type="100">Traceback (most recent call last):
+﻿  File "C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\5\Lab5ToolBox.pyt", line 99, in execute
+    arcpy.FeatureClassToGeodatabase_conversion(input_layer, gdb_path)
+﻿  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\conversion.py", line 4080, in FeatureClassToGeodatabase
+    raise e
+﻿  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\conversion.py", line 4076, in FeatureClassToGeodatabase
+    gp.FeatureClassToGeodatabase_conversion(*gp_fixargs((Input_Features, Output_Geodatabase), True))
+﻿  File "C:\Program Files\ArcGIS\Pro\Resources\ArcPy\arcpy\geoprocessing\_base.py", line 532, in &lt;lambda&gt;
+    return lambda *args: val(*gp_fixargs(args, True))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+﻿arcgisscripting.ExecuteError: Failed to execute. Parameters are not valid.
+ERROR 000732: Output Geodatabase: Dataset C:\Users\ms_ra\GitHub\GEOG676-GIS-PROGRAMMING-SPRING25\Labs\5\Horticulture Field Laboratory does not exist or is not supported
+Failed to execute (FeatureClassToGeodatabase).
+
+﻿
+If you suspect this is an IPython 8.18.1 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+or send an email to the mailing list at ipython-dev@python.org
+
+You can print a more detailed traceback right now with "%tb", or use "%debug"
+to interactively debug it.
+
+Extra-detailed tracebacks for bug-reporting purposes can be enabled via:
+    %config Application.verbose_crash=True
+
+</msg><msg code="-2147467259" type="100">Failed to execute (Tool).</msg><msg code="0" type="3">Failed at Sunday, February 23, 2025 7:13:46 PM (Elapsed Time: 0.35 seconds)</msg></messages>
