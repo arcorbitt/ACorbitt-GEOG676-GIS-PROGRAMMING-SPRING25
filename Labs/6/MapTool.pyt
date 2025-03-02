@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import arcpy
 
 
@@ -87,14 +88,14 @@ class GraduatedColorsRenderer(object):
         # Add Message to the Results Pane
         arcpy.AddMessage("Validating Project File...")
 
-        # Project File
+        # Project File, defining the project file "project" as the first parameter
         project = arcpy.mp.ArcGISProject(parameters[0].valueAsText) #param0 is the imput project file, helps us access the project's maps, layers, and symbology
 
-        # Grabs the First Instance of a Map from the .aprx
+        # Grabs the First Instance of a Map from the .aprx, defining a new variable "campus" as the first map in the project
         campus = project.listMaps('Map')[0] #get the first map in the project 
 
         # Increment Progressor
-        arcpy.SetProgressorPosition(start + step) #now is 33% complete because the "step" is 33
+        arcpy.SetProgressorPosition(start + step) 
         arcpy.SetProgressorLabel("Finding your map layer...")
         time.sleep(readTime) #pause the excution for 2.5 seconds
         arcpy.AddMessage("Finding your map layer...")
@@ -111,7 +112,7 @@ class GraduatedColorsRenderer(object):
                     if layer.name == parameters[1].valueAsText: # check if the layer name matches the input layer name
                         
                         # Increment Progressor
-                        arcpy.SetProgressorPosition(start + step * 2) #now is 66% complete because the "step" is 33
+                        arcpy.SetProgressorPosition(start + step) #now is 33% complete because the "step" is 33
                         arcpy.SetProgressorLabel("Calculating and classifying...")
                         time.sleep(readTime)
                         arcpy.AddMessage("Calculating and classifying...") #message added to the results pane
@@ -121,6 +122,12 @@ class GraduatedColorsRenderer(object):
 
                         # Tell arcpy which field we want to base our chloropleth off of
                         sym.renderer.classificationField = "Shape_Area"
+
+                        # Increment Progressor
+                        arcpy.SetProgressorPosition(start + step * 2) #now is 66% complete because the "step" is 33
+                        arcpy.SetProgressorLabel("Cleaning up...")
+                        time.sleep(readTime)
+                        arcpy.AddMessage("Cleaning up...")
 
                         # Set how many classes we want for the map
                         sym.renderer.breakCount = 5
@@ -143,7 +150,7 @@ class GraduatedColorsRenderer(object):
 
         # Save the Project
         project.saveACopy(parameters[2].valueAsText + "\\" + parameters[3].valueAsText + ".aprx")
-        # Param 2 is the folder location, Param 3 is the name of the new project
+        # Param 2 is the folder location, Param 3 is the name of the new project to a new file
                                                       
         return
 
