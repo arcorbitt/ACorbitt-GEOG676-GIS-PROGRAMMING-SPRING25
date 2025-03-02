@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import time
 import os
 import arcpy
 
@@ -33,7 +34,7 @@ class GraduatedColorsRenderer(object):
             direction="Input"
         )
         #Layer to Classify to create the graduated color map
-        Param1 = arcpy.Parameter(
+        param1 = arcpy.Parameter(
             displayName="Layer to Classify",
             name="LayertoClassify",
             datatype="GPLayer", #data type of the parameter (GPLayer is a layer in the map
@@ -41,21 +42,21 @@ class GraduatedColorsRenderer(object):
             direction="Input"
         )
         #Output Location of the new project
-        Param2 = arcpy.Parameter(
+        param2 = arcpy.Parameter(
             displayName="Output Location",
             name="OutputLocation",
             datatype="DEFolder", #data type of the parameter (DEFolder is a folder on a disk)
             direction="Input"
         )
         #Output Project Name
-        Param3 = arcpy.Parameter(
+        param3 = arcpy.Parameter(
             displayName="Output Project Name",
             name="OutputProjectName",
             datatype="GPString", #data type of the parameter (GPString is a string)
             parameterType="Required",
             direction="Input"
         )
-        params = [param0, Param1, Param2, Param3]
+        params = [param0, param1, param2, param3]
         return params
 
     def isLicensed(self):
@@ -139,7 +140,7 @@ class GraduatedColorsRenderer(object):
                         layer.symbology = sym
 
                         arcpy.AddMessage("Finished Generating Layer...")
-                    else
+                    else:
                         print('NO layers found')
 
         # Increment Progressor
